@@ -6,7 +6,7 @@ spring:
       ddl-auto: update
     database-platform: org.hibernate.dialect.PostgreSQLDialect
   datasource:
-    url: jdbc://postgresql://localhost:5432/company_utility_db
+    url: jdbc:postgresql://localhost:5432/company_utility_db
     username: dev_admin
     password: dev_admin
     driver-class-name: org.postgresql.Driver
@@ -16,6 +16,7 @@ spring:
         jwt:
           jwk-set-uri: http://localhost:9000/realms/company-utility/protocol/openid-connects/certs
           issuer-uri: http://localhost:9000/realms/company-utility
+          audiences:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
