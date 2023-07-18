@@ -1,0 +1,129 @@
+{
+	"info": {
+		"_postman_id": "9f281c2a-f239-41a9-ba3f-cd2f094c2543",
+		"name": "CompanyUtility",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11552416"
+	},
+	"item": [
+		{
+			"name": "Security",
+			"item": [
+				{
+					"name": "fetchToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "username",
+									"value": "{{KEYCLOAK_USERNAME}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{KEYCLOAK_PASSWORD}}",
+									"type": "text"
+								},
+								{
+									"key": "client_id",
+									"value": "{{KEYCLOAK_CLIENT_ID}}",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "{{KEYCLOAK_CLIENT_SECRET}}",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{KEYCLOAK_BASE_PATH}}/realms/{{KEYCLOAK_REALM}}/{{OIDC_TOKEN}}",
+							"host": [
+								"{{KEYCLOAK_BASE_PATH}}"
+							],
+							"path": [
+								"realms",
+								"{{KEYCLOAK_REALM}}",
+								"{{OIDC_TOKEN}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "password",
+				"value": "{{KEYCLOAK_PASSWORD}}",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "{{KEYCLOAK_USERNAME}}",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "{{KEYCLOAK_CLIENT_SECRET}}",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "{{KEYCLOAK_CLIENT_ID}}",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{KEYCLOAK_BASE_PATH}}/realms/{{KEYCLOAK_REALM}}/{{OIDC_TOKEN}}",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "tokenName",
+				"value": "keycloak",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

@@ -13,7 +13,7 @@ services:
     image: quay.io/keycloak/keycloak:21.1.1
     container_name: keycloak
     volumes:
-      - ./src/main/resources/keycloak-realms/realm.json:/opt/keycloak/data/import/realm.json
+      - ./src/main/resources/keycloak/realm.json:/opt/keycloak/data/import/realm.json
     environment:
       - KEYCLOAK_ADMIN=keycloak_adm
       - KEYCLOAK_ADMIN_PASSWORD=keycloak_adm_passwd
@@ -21,4 +21,4 @@ services:
       - "9000:8080"
     command:
       - start-dev
-      - --import-realm
+     # - --import-realm

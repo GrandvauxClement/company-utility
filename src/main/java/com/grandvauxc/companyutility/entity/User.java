@@ -14,7 +14,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "user")
+@Table(name = "\"user\"")
 public class User extends AbstractEntity{
 
     @Column(name = "email")
