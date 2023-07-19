@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public class AbstractService<T, ID extends Serializable, R extends CompanyUtilityRepository<T, ID>> implements AbstractServiceInterface<T,ID>{
 
-    private final R repository;
+    protected final R repository;
 
     AbstractService() {
         this.repository = null;
