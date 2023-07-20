@@ -10,6 +10,9 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.event.EventListener;
+import org.springframework.security.authentication.event.AuthenticationSuccessEvent;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.stereotype.Component;
@@ -20,19 +23,19 @@ import java.util.UUID;
 
 @Component
 @Slf4j
-public class AuthGard extends GenericFilterBean {
+public class AuthGard {
 
     private User federatedUser;
 
-    private UserService userService;
+    final UserService userService;
 
     public AuthGard(UserService userService) {
         this.userService = userService;
     }
 
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        User userFromToken = getUserFromRequest((HttpServletRequest) servletRequest);
+    @EventListener
+    public void onSuccess(AuthenticationSuccessEvent success) {
+        User userFromToken = getUserFromRequest(success.getAuthentication());
 
         log.info("Id profile: {}", userFromToken.getKeycloakId());
         User user ;
@@ -46,17 +49,20 @@ public class AuthGard extends GenericFilterBean {
         }
         log.info("Found Profile : {}", user.getEmail());
         this.federatedUser = user;
-        filterChain.doFilter(servletRequest, servletResponse);
     }
 
-    private User getUserFromRequest(HttpServletRequest request){
+    private User getUserFromRequest(Authentication authentication){
         User user = new User();
 
-        Jwt token = ((JwtAuthenticationToken) request.getUserPrincipal()).getToken();
+        Jwt token = (Jwt) authentication.getPrincipal();
 
         // Extractions info token
         user.setEmail(token.getClaimAsString("email"));
-        user.setKeycloakId(UUID.fromString(request.getUserPrincipal().getName()));
+        user.setKeycloakId(UUID.fromString(authentication.getName()));
         return user;
+    }
+
+    public User getFederatedUser() {
+        return federatedUser;
     }
 }

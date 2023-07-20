@@ -20,8 +20,3 @@ spring:
 springdoc:
   swagger-ui:
     path: /swagger-ui.html
-    oauth:
-      client-id: test
-      client-secret: test
-      realm: test
-      app-name: test

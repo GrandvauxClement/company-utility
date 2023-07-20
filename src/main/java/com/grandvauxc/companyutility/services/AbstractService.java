@@ -6,9 +6,10 @@ import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
-@Service
-public class AbstractService<T, ID extends Serializable, R extends CompanyUtilityRepository<T, ID>> implements AbstractServiceInterface<T,ID>{
+
+public abstract class AbstractService<T, ID extends Serializable, R extends CompanyUtilityRepository<T, ID>> implements AbstractServiceInterface<T,ID>{
 
     protected final R repository;
 
@@ -18,35 +19,39 @@ public class AbstractService<T, ID extends Serializable, R extends CompanyUtilit
     public AbstractService(R repository) {
         this.repository = repository;
     }
+
+    protected R getRepository(){
+        return Objects.requireNonNull(repository);
+    }
     @Override
     public T create(T entity) {
-        return repository.save(entity);
+        return getRepository().save(entity);
     }
 
     @Override
     public T findById(ID idEntity) {
-        return repository.findById(idEntity).orElse(null);
+        return getRepository().findById(idEntity).orElse(null);
     }
 
     @Override
     public List<T> findAll() {
-        return repository.findAll();
+        return getRepository().findAll();
     }
 
     @Override
     public void updateById(ID id, T entity) {
-        if (!repository.existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
-        repository.save(entity);
+        if (!getRepository().existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
+        getRepository().save(entity);
     }
 
     @Override
     public void deleteById(ID id, T entity) {
-        if (!repository.existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
-        repository.deleteById(id);
+        if (!getRepository().existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
+        getRepository().deleteById(id);
     }
 
     @Override
     public void deleteAll() {
-
+        getRepository().deleteAll();
     }
 }
