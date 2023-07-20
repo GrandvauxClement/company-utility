@@ -10,9 +10,9 @@ public interface AbstractServiceInterface<T, ID> {
 
     public List<T> findAll();
 
-    public void updateById(ID id, T entity);
+    public T updateById(ID id, T entity);
 
-    public void deleteById(ID id, T entity);
+    public void deleteById(ID id);
 
     public void deleteAll();
 }

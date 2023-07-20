@@ -4,11 +4,9 @@ import com.grandvauxc.companyutility.dto.CompanyDto;
 import com.grandvauxc.companyutility.entity.Company;
 import com.grandvauxc.companyutility.services.CompanyService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -50,5 +48,19 @@ public class CompanyResource {
         Company company = modelMapper.map(companyDto, Company.class);
         CompanyDto companyCreated = modelMapper.map(companyService.create(company), CompanyDto.class);
         return new ResponseEntity<>(companyCreated, HttpStatus.CREATED);
+    }
+
+    @PutMapping("/{idCompany}")
+    public ResponseEntity<CompanyDto> updateCompany(@PathVariable UUID idCompany, @RequestBody CompanyDto companyDto){
+        Company company = modelMapper.map(companyDto, Company.class);
+        CompanyDto companyDtoUpdated = modelMapper.map(companyService.updateById(idCompany,company), CompanyDto.class);
+        return new ResponseEntity<>(companyDtoUpdated, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{idCompany}")
+
+    public ResponseEntity<String> deleteCompanyById(@PathVariable UUID idCompany){
+        companyService.deleteById(idCompany);
+        return new ResponseEntity<>("Company with id " + idCompany + "deleted", HttpStatus.OK);
     }
 }

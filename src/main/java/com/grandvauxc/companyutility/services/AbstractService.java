@@ -39,14 +39,13 @@ public abstract class AbstractService<T, ID extends Serializable, R extends Comp
     }
 
     @Override
-    public void updateById(ID id, T entity) {
+    public T updateById(ID id, T entity) {
         if (!getRepository().existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
-        getRepository().save(entity);
+        return getRepository().save(entity);
     }
 
     @Override
-    public void deleteById(ID id, T entity) {
-        if (!getRepository().existsById(id)) throw new EntityNotFoundException((Class<?>) entity, id);
+    public void deleteById(ID id) {
         getRepository().deleteById(id);
     }
 
