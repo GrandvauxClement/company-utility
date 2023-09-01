@@ -2215,8 +2215,6 @@
       "id": "7e654304-ae7c-4b3c-b726-ae40d4f78ea3",
       "username": "admin",
       "email": "admin@admin.com",
-      "firstname": "admin",
-      "lastname": "admin",
       "enabled": true,
       "credentials": [
         {
