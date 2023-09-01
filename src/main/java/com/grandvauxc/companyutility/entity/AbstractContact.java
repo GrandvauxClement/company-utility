@@ -30,7 +30,7 @@ public class AbstractContact extends AbstractEntity{
     private String zipCode;
 
     @Column(name = "city")
-    private String City;
+    private String city;
 
     @Column(name = "contact_first_name")
     private String contactFirstName;

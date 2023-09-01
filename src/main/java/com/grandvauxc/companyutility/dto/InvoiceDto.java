@@ -1,20 +1,28 @@
 package com.grandvauxc.companyutility.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class InvoiceDto implements Serializable {
-    private final UUID id;
-    private final String place;
-    private final Long number;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime dateLimit;
-    private final List<InvoiceLineDto> invoiceLineList;
-    private final CustomerDto customer;
-    private final CompanyDto company;
+@NoArgsConstructor
+public class InvoiceDto extends AbstractDto {
+
+    private String place;
+
+    private Long number;
+
+    private LocalDateTime createdAt;
+
+    private LocalDateTime dateLimit;
+
+    private List<InvoiceLineDto> invoiceLineList;
+
+    private CustomerDto customer;
+
+    private CompanyDto company;
 }

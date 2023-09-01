@@ -1,16 +1,23 @@
 package com.grandvauxc.companyutility.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class InvoiceLineDto implements Serializable {
-    private final UUID id;
-    private final Long quantity;
-    private final Float priceHt;
-    private final String tva;
-    private final String description;
-    private final UUID invoiceId;
+@NoArgsConstructor
+public class InvoiceLineDto extends AbstractDto {
+
+    private Long quantity;
+
+    private Float priceHt;
+
+    private String tva;
+
+    private String description;
+
+    private UUID invoiceId;
 }

@@ -1,13 +1,17 @@
 package com.grandvauxc.companyutility.dto;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.UUID;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
-public class UserDto implements Serializable {
-    private final UUID id;
-    private final String email;
-    private final UUID keycloakId;
+@NoArgsConstructor
+public class UserDto extends AbstractDto {
+
+    private String email;
+
+    private UUID keycloakId;
 }
